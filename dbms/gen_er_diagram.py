@@ -27,21 +27,21 @@ THEMES = {
         'text': '#1E3A8A',
         'grid': '#BFDBFE'
     },
-    'session': {
+    'sessions': {
         'border': '#0D9488',      # Teal
         'header_bg': '#CCFBF1',
         'row_bg': '#F0FDFA',
         'text': '#115E59',
         'grid': '#99F6E4'
     },
-    'account': {
+    'accounts': {
         'border': '#7C3AED',      # Purple
         'header_bg': '#EDE9FE',
         'row_bg': '#FAF5FF',
         'text': '#5B21B6',
         'grid': '#DDD6FE'
     },
-    'verification': {
+    'verifications': {
         'border': '#64748B',      # Slate
         'header_bg': '#F1F5F9',
         'row_bg': '#F8FAFC',
@@ -69,14 +69,14 @@ THEMES = {
         'text': '#3730A3',
         'grid': '#C7D2FE'
     },
-    'conversation': {
+    'conversations': {
         'border': '#DB2777',      # Pink / Rose
         'header_bg': '#FCE7F3',
         'row_bg': '#FDF2F8',
         'text': '#9D174D',
         'grid': '#FBCFE8'
     },
-    'version': {
+    'versions': {
         'border': '#D97706',      # Amber
         'header_bg': '#FEF3C7',
         'row_bg': '#FFFBEB',
@@ -90,8 +90,8 @@ TABLES = {
         'x': 720, 'y': 150, 'w': 360,
         'cols': [
             ('text', 'id', 'PK'),
-            ('varchar', 'email', 'UK'),
-            ('varchar', 'name', ''),
+            ('varchar(255)', 'email', 'UK'),
+            ('varchar(255)', 'name', ''),
             ('text', 'image', ''),
             ('integer', 'total_creation', ''),
             ('integer', 'credits', ''),
@@ -100,7 +100,7 @@ TABLES = {
             ('timestamptz', 'updated_at', '')
         ]
     },
-    'session': {
+    'sessions': {
         'x': 180, 'y': 150, 'w': 340,
         'cols': [
             ('text', 'id', 'PK'),
@@ -113,13 +113,13 @@ TABLES = {
             ('timestamptz', 'updated_at', '')
         ]
     },
-    'account': {
+    'accounts': {
         'x': 1260, 'y': 150, 'w': 380,
         'cols': [
             ('text', 'id', 'PK'),
             ('text', 'user_id', 'FK'),
-            ('varchar', 'provider_id', ''),
-            ('varchar', 'account_id', ''),
+            ('varchar(50)', 'provider_id', ''),
+            ('varchar(255)', 'account_id', ''),
             ('text', 'access_token', ''),
             ('text', 'refresh_token', ''),
             ('text', 'id_token', ''),
@@ -131,7 +131,7 @@ TABLES = {
             ('timestamptz', 'updated_at', '')
         ]
     },
-    'verification': {
+    'verifications': {
         'x': 180, 'y': 620, 'w': 340,
         'cols': [
             ('text', 'id', 'PK'),
@@ -145,10 +145,10 @@ TABLES = {
     'subscription_plans': {
         'x': 180, 'y': 970, 'w': 340,
         'cols': [
-            ('varchar', 'plan_id', 'PK'),
-            ('varchar', 'name', ''),
+            ('varchar(50)', 'plan_id', 'PK'),
+            ('varchar(100)', 'name', ''),
             ('integer', 'credits', ''),
-            ('numeric(10,2)', 'price_usd', ''),
+            ('numeric(10,2)', 'amount_usd', ''),
             ('boolean', 'is_active', ''),
             ('timestamptz', 'created_at', '')
         ]
@@ -158,11 +158,11 @@ TABLES = {
         'cols': [
             ('uuid', 'id', 'PK'),
             ('text', 'user_id', 'FK'),
-            ('varchar', 'plan_id', 'FK'),
+            ('varchar(50)', 'plan_id', 'FK'),
             ('numeric(10,2)', 'amount', ''),
             ('integer', 'credits', ''),
             ('boolean', 'is_paid', ''),
-            ('varchar', 'stripe_session_id', ''),
+            ('varchar(255)', 'stripe_session_id', ''),
             ('timestamptz', 'created_at', ''),
             ('timestamptz', 'updated_at', '')
         ]
@@ -172,16 +172,16 @@ TABLES = {
         'cols': [
             ('uuid', 'id', 'PK'),
             ('text', 'user_id', 'FK'),
-            ('varchar', 'name', ''),
+            ('varchar(255)', 'name', ''),
             ('text', 'initial_prompt', ''),
-            ('uuid', 'current_version_id', 'FK'),
             ('text', 'current_code', ''),
+            ('uuid', 'current_version_id', 'FK'),
             ('boolean', 'is_published', ''),
             ('timestamptz', 'created_at', ''),
             ('timestamptz', 'updated_at', '')
         ]
     },
-    'conversation': {
+    'conversations': {
         'x': 600, 'y': 1480, 'w': 360,
         'cols': [
             ('uuid', 'id', 'PK'),
@@ -191,13 +191,13 @@ TABLES = {
             ('timestamptz', 'timestamp', '')
         ]
     },
-    'version': {
+    'versions': {
         'x': 1180, 'y': 1480, 'w': 370,
         'cols': [
             ('uuid', 'id', 'PK'),
             ('uuid', 'project_id', 'FK'),
             ('text', 'code', ''),
-            ('text', 'description', ''),
+            ('varchar(255)', 'description', ''),
             ('timestamptz', 'timestamp', '')
         ]
     }
@@ -274,28 +274,24 @@ LINE_WIDTH = 2.0
 def draw_crows_foot(x, y, direct='bottom'):
     size = 14
     if direct == 'bottom':
-        # Arrow pointing up into table bottom
         pts = [(x - size, y + size), (x, y), (x + size, y + size)]
         ax.plot([pts[0][0], pts[1][0]], [pts[0][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([pts[2][0], pts[1][0]], [pts[2][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([x - size, x + size], [y + size, y + size], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         return y + size
     elif direct == 'top':
-        # Arrow pointing down into table top
         pts = [(x - size, y - size), (x, y), (x + size, y - size)]
         ax.plot([pts[0][0], pts[1][0]], [pts[0][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([pts[2][0], pts[1][0]], [pts[2][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([x - size, x + size], [y - size, y - size], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         return y - size
     elif direct == 'left':
-        # Arrow pointing right into table left
         pts = [(x - size, y - size), (x, y), (x - size, y + size)]
         ax.plot([pts[0][0], pts[1][0]], [pts[0][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([pts[2][0], pts[1][0]], [pts[2][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([x - size, x - size], [y - size, y + size], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         return x - size
     elif direct == 'right':
-        # Arrow pointing left into table right
         pts = [(x + size, y - size), (x, y), (x + size, y + size)]
         ax.plot([pts[0][0], pts[1][0]], [pts[0][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
         ax.plot([pts[2][0], pts[1][0]], [pts[2][1], pts[1][1]], color=LINE_COLOR, lw=LINE_WIDTH, zorder=5)
@@ -332,7 +328,7 @@ def label_relation(x, y, text):
 ax.text(900, 50, "AI WEB BUILDER — RELATIONAL DATABASE ER DIAGRAM (BCNF)",
         ha='center', va='center', fontsize=20, fontweight='heavy',
         color='#0F172A', family='sans-serif')
-ax.text(900, 85, "Team T0080  |  Course: Advanced Programming / DBMS  |  Mentor: Satyaki  |  PostgreSQL 16+",
+ax.text(900, 85, "Team T0080  |  Course: Advanced Programming / DBMS  |  Mentor: Satyaki  |  PostgreSQL 14+",
         ha='center', va='center', fontsize=12, fontweight='medium',
         color='#475569', family='sans-serif')
 
@@ -342,30 +338,27 @@ for name, info in TABLES.items():
 
 # ----------------- RELATIONSHIPS & CONNECTORS -----------------
 
-# 1. USERS -> SESSION (1 to Many: user maintains sessions)
-# Out left from USERS, into right of SESSION
+# 1. USERS -> SESSIONS (1 to Many: user maintains sessions)
 u_x_l = TABLES['users']['x']
 u_y_s = TABLES['users']['y'] + 60
-s_x_r = TABLES['session']['x'] + TABLES['session']['w']
-s_y = TABLES['session']['y'] + 60
+s_x_r = TABLES['sessions']['x'] + TABLES['sessions']['w']
+s_y = TABLES['sessions']['y'] + 60
 draw_mandatory_one(u_x_l - 12, u_y_s, 'horizontal')
 end_x = draw_crows_foot(s_x_r, s_y, 'right')
 ax.plot([u_x_l, end_x], [u_y_s, s_y], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 label_relation((u_x_l + s_x_r) / 2, u_y_s - 14, "maintains (1:N)")
 
-# 2. USERS -> ACCOUNT (1 to Many: user authenticates via accounts)
-# Out right from USERS, into left of ACCOUNT
+# 2. USERS -> ACCOUNTS (1 to Many: user authenticates via accounts)
 u_x_r = TABLES['users']['x'] + TABLES['users']['w']
 u_y_a = TABLES['users']['y'] + 60
-a_x_l = TABLES['account']['x']
-a_y = TABLES['account']['y'] + 60
+a_x_l = TABLES['accounts']['x']
+a_y = TABLES['accounts']['y'] + 60
 draw_mandatory_one(u_x_r + 12, u_y_a, 'horizontal')
 end_x = draw_crows_foot(a_x_l, a_y, 'left')
 ax.plot([u_x_r, end_x], [u_y_a, a_y], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 label_relation((u_x_r + a_x_l) / 2, u_y_a - 14, "authenticates (1:N)")
 
 # 3. USERS -> WEBSITE_PROJECTS (1 to Many: user owns projects)
-# Out bottom of USERS, down to top of WEBSITE_PROJECTS
 u_b = TABLES['users']['b']
 u_x_mid = TABLES['users']['x'] + 180
 p_t = TABLES['website_projects']['y']
@@ -376,7 +369,6 @@ ax.plot([u_x_mid, p_x_mid], [u_b, end_y], color=LINE_COLOR, lw=LINE_WIDTH, zorde
 label_relation(p_x_mid + 45, (u_b + p_t) / 2, "owns (1:N)")
 
 # 4. USERS -> TRANSACTIONS (1 to Many: user purchases credits)
-# Out left from USERS, down corridor x=590, into top of TRANSACTIONS
 u_y_tx = TABLES['users']['y'] + 220
 tx_t = TABLES['transactions']['y']
 tx_x_mid = TABLES['transactions']['x'] + 180
@@ -389,7 +381,6 @@ ax.plot([tx_x_mid, tx_x_mid], [1280, end_y], color=LINE_COLOR, lw=LINE_WIDTH, zo
 label_relation(590, 750, "purchases (1:N)")
 
 # 5. SUBSCRIPTION_PLANS -> TRANSACTIONS (1 to Many: plan defines package)
-# Out bottom of SUBSCRIPTION_PLANS, straight down into top of TRANSACTIONS
 sp_b = TABLES['subscription_plans']['b']
 sp_x = TABLES['subscription_plans']['x'] + 100
 tx_x_sp = TABLES['transactions']['x'] + 100
@@ -398,12 +389,11 @@ end_y = draw_crows_foot(tx_x_sp, tx_t, 'top')
 ax.plot([sp_x, tx_x_sp], [sp_b, end_y], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 label_relation(sp_x + 50, (sp_b + tx_t) / 2, "defines (1:N)")
 
-# 6. WEBSITE_PROJECTS -> CONVERSATION (1 to Many: project logs conversation messages)
-# Out bottom of WEBSITE_PROJECTS, down to top of CONVERSATION
+# 6. WEBSITE_PROJECTS -> CONVERSATIONS (1 to Many: project logs conversation messages)
 p_b = TABLES['website_projects']['b']
 p_x_c = TABLES['website_projects']['x'] + 80
-c_t = TABLES['conversation']['y']
-c_x = TABLES['conversation']['x'] + 180
+c_t = TABLES['conversations']['y']
+c_x = TABLES['conversations']['x'] + 180
 draw_mandatory_one(p_x_c, p_b + 12, 'vertical')
 ax.plot([p_x_c, p_x_c], [p_b, 1400], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 ax.plot([p_x_c, c_x], [1400, 1400], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
@@ -411,11 +401,10 @@ end_y = draw_crows_foot(c_x, c_t, 'top')
 ax.plot([c_x, c_x], [1400, end_y], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 label_relation(c_x - 45, 1425, "records (1:N)")
 
-# 7. WEBSITE_PROJECTS -> VERSION (1 to Many: project creates code versions)
-# Out bottom of WEBSITE_PROJECTS, down to top of VERSION
+# 7. WEBSITE_PROJECTS -> VERSIONS (1 to Many: project creates code versions)
 p_x_v = TABLES['website_projects']['x'] + 300
-v_t = TABLES['version']['y']
-v_x = TABLES['version']['x'] + 180
+v_t = TABLES['versions']['y']
+v_x = TABLES['versions']['x'] + 180
 draw_mandatory_one(p_x_v, p_b + 12, 'vertical')
 ax.plot([p_x_v, p_x_v], [p_b, 1400], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 ax.plot([p_x_v, v_x], [1400, 1400], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
@@ -423,12 +412,11 @@ end_y = draw_crows_foot(v_x, v_t, 'top')
 ax.plot([v_x, v_x], [1400, end_y], color=LINE_COLOR, lw=LINE_WIDTH, zorder=4)
 label_relation(v_x + 45, 1425, "revises into (1:N)")
 
-# 8. WEBSITE_PROJECTS -> VERSION (current_version_id, 1 to 1 optional link)
-# Out right from WEBSITE_PROJECTS, down to right of VERSION
+# 8. WEBSITE_PROJECTS -> VERSIONS (current_version_id, 1 to 1 optional link)
 p_r_x = TABLES['website_projects']['x'] + TABLES['website_projects']['w']
 p_r_y = TABLES['website_projects']['y'] + 140
-v_r_x = TABLES['version']['x'] + TABLES['version']['w']
-v_r_y = TABLES['version']['y'] + 60
+v_r_x = TABLES['versions']['x'] + TABLES['versions']['w']
+v_r_y = TABLES['versions']['y'] + 60
 draw_optional_one(p_r_x + 12, p_r_y, 'horizontal')
 ax.plot([p_r_x, 1650], [p_r_y, p_r_y], color='#6366F1', lw=LINE_WIDTH, ls='--', zorder=4)
 ax.plot([1650, 1650], [p_r_y, v_r_y], color='#6366F1', lw=LINE_WIDTH, ls='--', zorder=4)
