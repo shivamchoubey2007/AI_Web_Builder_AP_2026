@@ -1,0 +1,583 @@
+{
+  "benchmark_date": "2026-11-24 00:02:53 IST",
+  "engine_version": "PostgreSQL 18.4 (Homebrew) on aarch64-apple-darwin25.6.0, compiled by Apple clang version 21.0.0 (clang-2100.1.1.101), 64-bit",
+  "platform": "Darwin arm64 (macOS-27.2.1-arm64-arm-64bit-Mach-O)",
+  "queries": {
+    "Q01": {
+      "name": "User credential authentication lookup",
+      "concepts": "INNER JOIN, equality filtering, LIMIT",
+      "baseline": {
+        "name": "User credential authentication lookup",
+        "concepts": "INNER JOIN, equality filtering, LIMIT",
+        "row_count": 2,
+        "fingerprint": "1e4f9a3d196ee97a63bf8906bb686d0c631f5a29ee260deece998135f15a878c",
+        "run_1_ms": 0.042,
+        "run_2_ms": 0.038,
+        "run_3_ms": 0.04,
+        "all_runs_ms": [
+          0.042,
+          0.038,
+          0.04,
+          0.045,
+          0.061
+        ],
+        "median_ms": 0.042,
+        "avg_ms": 0.045200000000000004,
+        "planning_ms": 0.814,
+        "shared_hit_blocks": 6,
+        "shared_read_blocks": 0,
+        "plan_file": "q01_before.json"
+      },
+      "optimized": {
+        "row_count": 2,
+        "fingerprint": "1e4f9a3d196ee97a63bf8906bb686d0c631f5a29ee260deece998135f15a878c",
+        "equivalent": true,
+        "run_1_ms": 0.039,
+        "run_2_ms": 0.039,
+        "run_3_ms": 0.038,
+        "all_runs_ms": [
+          0.039,
+          0.039,
+          0.038,
+          0.038,
+          0.042
+        ],
+        "median_ms": 0.039,
+        "avg_ms": 0.0392,
+        "planning_ms": 0.747,
+        "shared_hit_blocks": 6,
+        "shared_read_blocks": 0,
+        "plan_file": "q01_after.json",
+        "speedup_ratio": 1.076923076923077
+      }
+    },
+    "Q02": {
+      "name": "Active session validation and profile security check",
+      "concepts": "INNER JOIN, unique token lookup, date comparison",
+      "baseline": {
+        "name": "Active session validation and profile security check",
+        "concepts": "INNER JOIN, unique token lookup, date comparison",
+        "row_count": 1,
+        "fingerprint": "6c1ed22b7c5e35c0d22d2d8ecfeca4a941a9c60075ee0b826d8daabbaf631b7f",
+        "run_1_ms": 0.033,
+        "run_2_ms": 0.032,
+        "run_3_ms": 0.035,
+        "all_runs_ms": [
+          0.033,
+          0.032,
+          0.035,
+          0.037,
+          0.042
+        ],
+        "median_ms": 0.035,
+        "avg_ms": 0.0358,
+        "planning_ms": 0.879,
+        "shared_hit_blocks": 2,
+        "shared_read_blocks": 0,
+        "plan_file": "q02_before.json"
+      },
+      "optimized": {
+        "row_count": 1,
+        "fingerprint": "6c1ed22b7c5e35c0d22d2d8ecfeca4a941a9c60075ee0b826d8daabbaf631b7f",
+        "equivalent": true,
+        "run_1_ms": 0.042,
+        "run_2_ms": 0.038,
+        "run_3_ms": 0.035,
+        "all_runs_ms": [
+          0.042,
+          0.038,
+          0.035,
+          0.034,
+          0.032
+        ],
+        "median_ms": 0.035,
+        "avg_ms": 0.036199999999999996,
+        "planning_ms": 0.819,
+        "shared_hit_blocks": 2,
+        "shared_read_blocks": 0,
+        "plan_file": "q02_after.json",
+        "speedup_ratio": 1.0
+      }
+    },
+    "Q03": {
+      "name": "Active project workspace with code and active version",
+      "concepts": "LEFT JOIN, INNER JOIN, UUID lookups",
+      "baseline": {
+        "name": "Active project workspace with code and active version",
+        "concepts": "LEFT JOIN, INNER JOIN, UUID lookups",
+        "row_count": 2,
+        "fingerprint": "649976f13bf5af2f1563af0da85f5852602baae8652d0eb05dc4fe28eab43d6f",
+        "run_1_ms": 0.085,
+        "run_2_ms": 0.084,
+        "run_3_ms": 0.096,
+        "all_runs_ms": [
+          0.085,
+          0.084,
+          0.096,
+          0.077,
+          0.119
+        ],
+        "median_ms": 0.085,
+        "avg_ms": 0.0922,
+        "planning_ms": 1.077,
+        "shared_hit_blocks": 6,
+        "shared_read_blocks": 0,
+        "plan_file": "q03_before.json"
+      },
+      "optimized": {
+        "row_count": 2,
+        "fingerprint": "649976f13bf5af2f1563af0da85f5852602baae8652d0eb05dc4fe28eab43d6f",
+        "equivalent": true,
+        "run_1_ms": 0.12,
+        "run_2_ms": 0.094,
+        "run_3_ms": 0.08,
+        "all_runs_ms": [
+          0.12,
+          0.094,
+          0.08,
+          0.08,
+          0.08
+        ],
+        "median_ms": 0.08,
+        "avg_ms": 0.0908,
+        "planning_ms": 1.173,
+        "shared_hit_blocks": 6,
+        "shared_read_blocks": 0,
+        "plan_file": "q03_after.json",
+        "speedup_ratio": 1.0625
+      }
+    },
+    "Q04": {
+      "name": "Chronological project dialogue history stream",
+      "concepts": "INNER JOIN, FK filtering, ascending ordering",
+      "baseline": {
+        "name": "Chronological project dialogue history stream",
+        "concepts": "INNER JOIN, FK filtering, ascending ordering",
+        "row_count": 14,
+        "fingerprint": "696efa17ab3394eb1cb57e93729f3a4e80954b96aeb2c5658a0447300a9dcc5c",
+        "run_1_ms": 0.112,
+        "run_2_ms": 0.104,
+        "run_3_ms": 0.107,
+        "all_runs_ms": [
+          0.112,
+          0.104,
+          0.107,
+          0.108,
+          0.106
+        ],
+        "median_ms": 0.107,
+        "avg_ms": 0.10740000000000001,
+        "planning_ms": 0.642,
+        "shared_hit_blocks": 10,
+        "shared_read_blocks": 0,
+        "plan_file": "q04_before.json"
+      },
+      "optimized": {
+        "row_count": 14,
+        "fingerprint": "696efa17ab3394eb1cb57e93729f3a4e80954b96aeb2c5658a0447300a9dcc5c",
+        "equivalent": true,
+        "run_1_ms": 0.108,
+        "run_2_ms": 0.104,
+        "run_3_ms": 0.102,
+        "all_runs_ms": [
+          0.108,
+          0.104,
+          0.102,
+          0.121,
+          0.107
+        ],
+        "median_ms": 0.107,
+        "avg_ms": 0.10840000000000001,
+        "planning_ms": 0.716,
+        "shared_hit_blocks": 10,
+        "shared_read_blocks": 0,
+        "plan_file": "q04_after.json",
+        "speedup_ratio": 1.0
+      }
+    },
+    "Q05": {
+      "name": "Project version history and rollback targets",
+      "concepts": "INNER JOIN, FK filtering, descending ordering",
+      "baseline": {
+        "name": "Project version history and rollback targets",
+        "concepts": "INNER JOIN, FK filtering, descending ordering",
+        "row_count": 3,
+        "fingerprint": "16d486587ed8c7db81f54dd097aa2a0de5244ab8a8a0b573eb579f7c863290e6",
+        "run_1_ms": 0.095,
+        "run_2_ms": 0.099,
+        "run_3_ms": 0.1,
+        "all_runs_ms": [
+          0.095,
+          0.099,
+          0.1,
+          0.125,
+          0.098
+        ],
+        "median_ms": 0.099,
+        "avg_ms": 0.1034,
+        "planning_ms": 0.698,
+        "shared_hit_blocks": 10,
+        "shared_read_blocks": 0,
+        "plan_file": "q05_before.json"
+      },
+      "optimized": {
+        "row_count": 3,
+        "fingerprint": "16d486587ed8c7db81f54dd097aa2a0de5244ab8a8a0b573eb579f7c863290e6",
+        "equivalent": true,
+        "run_1_ms": 0.136,
+        "run_2_ms": 0.1,
+        "run_3_ms": 0.094,
+        "all_runs_ms": [
+          0.136,
+          0.1,
+          0.094,
+          0.09,
+          0.095
+        ],
+        "median_ms": 0.095,
+        "avg_ms": 0.10300000000000001,
+        "planning_ms": 0.801,
+        "shared_hit_blocks": 10,
+        "shared_read_blocks": 0,
+        "plan_file": "q05_after.json",
+        "speedup_ratio": 1.0421052631578949
+      }
+    },
+    "Q06": {
+      "name": "User projects dashboard with aggregate summary counts",
+      "concepts": "3-table join, GROUP BY, COUNT DISTINCT, MAX aggregate",
+      "baseline": {
+        "name": "User projects dashboard with aggregate summary counts",
+        "concepts": "3-table join, GROUP BY, COUNT DISTINCT, MAX aggregate",
+        "row_count": 4,
+        "fingerprint": "dda885bfb470275055b07ce76f977bfb6823d9f353f1c9c921baef4dca007719",
+        "run_1_ms": 0.295,
+        "run_2_ms": 0.301,
+        "run_3_ms": 0.289,
+        "all_runs_ms": [
+          0.295,
+          0.301,
+          0.289,
+          0.263,
+          0.287
+        ],
+        "median_ms": 0.289,
+        "avg_ms": 0.28700000000000003,
+        "planning_ms": 1.02,
+        "shared_hit_blocks": 51,
+        "shared_read_blocks": 0,
+        "plan_file": "q06_before.json"
+      },
+      "optimized": {
+        "row_count": 4,
+        "fingerprint": "dda885bfb470275055b07ce76f977bfb6823d9f353f1c9c921baef4dca007719",
+        "equivalent": true,
+        "run_1_ms": 0.297,
+        "run_2_ms": 0.306,
+        "run_3_ms": 0.309,
+        "all_runs_ms": [
+          0.297,
+          0.306,
+          0.309,
+          0.283,
+          0.27
+        ],
+        "median_ms": 0.297,
+        "avg_ms": 0.293,
+        "planning_ms": 1.143,
+        "shared_hit_blocks": 51,
+        "shared_read_blocks": 0,
+        "plan_file": "q06_after.json",
+        "speedup_ratio": 0.9730639730639731
+      }
+    },
+    "Q07": {
+      "name": "Published community projects showcase discovery feed",
+      "concepts": "Partial filtering, INNER JOIN, descending ordering, LIMIT",
+      "baseline": {
+        "name": "Published community projects showcase discovery feed",
+        "concepts": "Partial filtering, INNER JOIN, descending ordering, LIMIT",
+        "row_count": 21,
+        "fingerprint": "4bf1f2d87956cdaf10b7ae3170d504070af6c13f104e809d14507db896eda190",
+        "run_1_ms": 3.657,
+        "run_2_ms": 3.382,
+        "run_3_ms": 3.434,
+        "all_runs_ms": [
+          3.657,
+          3.382,
+          3.434,
+          3.133,
+          3.66
+        ],
+        "median_ms": 3.434,
+        "avg_ms": 3.4532000000000003,
+        "planning_ms": 0.845,
+        "shared_hit_blocks": 1287,
+        "shared_read_blocks": 0,
+        "plan_file": "q07_before.json"
+      },
+      "optimized": {
+        "row_count": 21,
+        "fingerprint": "4bf1f2d87956cdaf10b7ae3170d504070af6c13f104e809d14507db896eda190",
+        "equivalent": true,
+        "run_1_ms": 0.11,
+        "run_2_ms": 0.097,
+        "run_3_ms": 0.101,
+        "all_runs_ms": [
+          0.11,
+          0.097,
+          0.101,
+          0.106,
+          0.115
+        ],
+        "median_ms": 0.106,
+        "avg_ms": 0.1058,
+        "planning_ms": 0.801,
+        "shared_hit_blocks": 70,
+        "shared_read_blocks": 0,
+        "plan_file": "q07_after.json",
+        "speedup_ratio": 32.39622641509434
+      }
+    },
+    "Q08": {
+      "name": "Public live published website code rendering",
+      "concepts": "UUID lookup, boolean condition, projection",
+      "baseline": {
+        "name": "Public live published website code rendering",
+        "concepts": "UUID lookup, boolean condition, projection",
+        "row_count": 1,
+        "fingerprint": "39fe32e35e3c4827aaf550c2565323fb5845d1b59036cee64d3471eee58b4d5e",
+        "run_1_ms": 0.048,
+        "run_2_ms": 0.052,
+        "run_3_ms": 0.048,
+        "all_runs_ms": [
+          0.048,
+          0.052,
+          0.048,
+          0.049,
+          0.051
+        ],
+        "median_ms": 0.049,
+        "avg_ms": 0.0496,
+        "planning_ms": 0.857,
+        "shared_hit_blocks": 3,
+        "shared_read_blocks": 0,
+        "plan_file": "q08_before.json"
+      },
+      "optimized": {
+        "row_count": 1,
+        "fingerprint": "39fe32e35e3c4827aaf550c2565323fb5845d1b59036cee64d3471eee58b4d5e",
+        "equivalent": true,
+        "run_1_ms": 0.049,
+        "run_2_ms": 0.06,
+        "run_3_ms": 0.052,
+        "all_runs_ms": [
+          0.049,
+          0.06,
+          0.052,
+          0.053,
+          0.049
+        ],
+        "median_ms": 0.052,
+        "avg_ms": 0.0526,
+        "planning_ms": 0.921,
+        "shared_hit_blocks": 3,
+        "shared_read_blocks": 0,
+        "plan_file": "q08_after.json",
+        "speedup_ratio": 0.9423076923076924
+      }
+    },
+    "Q09": {
+      "name": "Stripe webhook transaction settlement verification",
+      "concepts": "3-table join, UUID primary key lookup",
+      "baseline": {
+        "name": "Stripe webhook transaction settlement verification",
+        "concepts": "3-table join, UUID primary key lookup",
+        "row_count": 2,
+        "fingerprint": "7a94ff88f602b314838ffa7258805e81e77616f8be0387a5683896abe5bc4c58",
+        "run_1_ms": 0.06,
+        "run_2_ms": 0.073,
+        "run_3_ms": 0.064,
+        "all_runs_ms": [
+          0.06,
+          0.073,
+          0.064,
+          0.056,
+          0.061
+        ],
+        "median_ms": 0.061,
+        "avg_ms": 0.0628,
+        "planning_ms": 1.065,
+        "shared_hit_blocks": 7,
+        "shared_read_blocks": 0,
+        "plan_file": "q09_before.json"
+      },
+      "optimized": {
+        "row_count": 2,
+        "fingerprint": "7a94ff88f602b314838ffa7258805e81e77616f8be0387a5683896abe5bc4c58",
+        "equivalent": true,
+        "run_1_ms": 0.056,
+        "run_2_ms": 0.061,
+        "run_3_ms": 0.058,
+        "all_runs_ms": [
+          0.056,
+          0.061,
+          0.058,
+          0.051,
+          0.058
+        ],
+        "median_ms": 0.058,
+        "avg_ms": 0.0568,
+        "planning_ms": 1.05,
+        "shared_hit_blocks": 7,
+        "shared_read_blocks": 0,
+        "plan_file": "q09_after.json",
+        "speedup_ratio": 1.0517241379310345
+      }
+    },
+    "Q10": {
+      "name": "User billing and invoice purchase ledger",
+      "concepts": "INNER JOIN, user filtering, descending ordering",
+      "baseline": {
+        "name": "User billing and invoice purchase ledger",
+        "concepts": "INNER JOIN, user filtering, descending ordering",
+        "row_count": 9,
+        "fingerprint": "a5997215aeceaa51ed1379dd44eed86794567dc74333799c8230b3952540e93f",
+        "run_1_ms": 0.113,
+        "run_2_ms": 0.127,
+        "run_3_ms": 0.108,
+        "all_runs_ms": [
+          0.113,
+          0.127,
+          0.108,
+          0.107,
+          0.099
+        ],
+        "median_ms": 0.108,
+        "avg_ms": 0.11080000000000001,
+        "planning_ms": 0.728,
+        "shared_hit_blocks": 14,
+        "shared_read_blocks": 0,
+        "plan_file": "q10_before.json"
+      },
+      "optimized": {
+        "row_count": 9,
+        "fingerprint": "a5997215aeceaa51ed1379dd44eed86794567dc74333799c8230b3952540e93f",
+        "equivalent": true,
+        "run_1_ms": 0.103,
+        "run_2_ms": 0.092,
+        "run_3_ms": 0.093,
+        "all_runs_ms": [
+          0.103,
+          0.092,
+          0.093,
+          0.102,
+          0.119
+        ],
+        "median_ms": 0.102,
+        "avg_ms": 0.1018,
+        "planning_ms": 0.95,
+        "shared_hit_blocks": 14,
+        "shared_read_blocks": 0,
+        "plan_file": "q10_after.json",
+        "speedup_ratio": 1.0588235294117647
+      }
+    },
+    "Q11": {
+      "name": "Top community creators leaderboard by published websites",
+      "concepts": "CTE, GROUP BY, HAVING, DENSE_RANK window function",
+      "baseline": {
+        "name": "Top community creators leaderboard by published websites",
+        "concepts": "CTE, GROUP BY, HAVING, DENSE_RANK window function",
+        "row_count": 11,
+        "fingerprint": "7fa2f95e3aa7a8aa37d829658058cb56126d97818b5ff7831d6e852308d4f710",
+        "run_1_ms": 3.855,
+        "run_2_ms": 4.457,
+        "run_3_ms": 3.674,
+        "all_runs_ms": [
+          3.855,
+          4.457,
+          3.674,
+          3.693,
+          3.876
+        ],
+        "median_ms": 3.855,
+        "avg_ms": 3.911,
+        "planning_ms": 0.877,
+        "shared_hit_blocks": 1290,
+        "shared_read_blocks": 0,
+        "plan_file": "q11_before.json"
+      },
+      "optimized": {
+        "row_count": 11,
+        "fingerprint": "7fa2f95e3aa7a8aa37d829658058cb56126d97818b5ff7831d6e852308d4f710",
+        "equivalent": true,
+        "run_1_ms": 3.307,
+        "run_2_ms": 2.932,
+        "run_3_ms": 3.078,
+        "all_runs_ms": [
+          3.307,
+          2.932,
+          3.078,
+          3.05,
+          3.441
+        ],
+        "median_ms": 3.078,
+        "avg_ms": 3.1616,
+        "planning_ms": 1.199,
+        "shared_hit_blocks": 671,
+        "shared_read_blocks": 0,
+        "plan_file": "q11_after.json",
+        "speedup_ratio": 1.2524366471734893
+      }
+    },
+    "Q12": {
+      "name": "Daily paid checkout revenue and credit issuance velocity",
+      "concepts": "IST date grouping, SUM, COUNT, conditional filter",
+      "baseline": {
+        "name": "Daily paid checkout revenue and credit issuance velocity",
+        "concepts": "IST date grouping, SUM, COUNT, conditional filter",
+        "row_count": 21,
+        "fingerprint": "e55699c5da0ea95c6e69cc1f64278aec599dfb516ef198c0f5233f808318800c",
+        "run_1_ms": 2.941,
+        "run_2_ms": 3.253,
+        "run_3_ms": 2.993,
+        "all_runs_ms": [
+          2.941,
+          3.253,
+          2.993,
+          2.769,
+          2.889
+        ],
+        "median_ms": 2.941,
+        "avg_ms": 2.969,
+        "planning_ms": 0.495,
+        "shared_hit_blocks": 176,
+        "shared_read_blocks": 0,
+        "plan_file": "q12_before.json"
+      },
+      "optimized": {
+        "row_count": 21,
+        "fingerprint": "e55699c5da0ea95c6e69cc1f64278aec599dfb516ef198c0f5233f808318800c",
+        "equivalent": true,
+        "run_1_ms": 2.257,
+        "run_2_ms": 2.439,
+        "run_3_ms": 2.383,
+        "all_runs_ms": [
+          2.257,
+          2.439,
+          2.383,
+          2.23,
+          2.342
+        ],
+        "median_ms": 2.342,
+        "avg_ms": 2.3302,
+        "planning_ms": 0.565,
+        "shared_hit_blocks": 88,
+        "shared_read_blocks": 0,
+        "plan_file": "q12_after.json",
+        "speedup_ratio": 1.2557643040136635
+      }
+    }
+  }
+}

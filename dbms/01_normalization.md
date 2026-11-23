@@ -321,7 +321,7 @@ $$(R_1 \cap R_2) \rightarrow R_1 \quad \text{OR} \quad (R_1 \cap R_2) \rightarro
   - $\text{website\_projects} \cap \text{versions} = \{\text{project\_id}\}$, and $\text{project\_id} \rightarrow \text{website\_projects}$. Hence, lossless.
   - $\text{website\_projects} \cap \text{conversations} = \{\text{project\_id}\}$, and $\text{project\_id} \rightarrow \text{website\_projects}$. Hence, lossless.
   - $\text{users} \cap \text{transactions} = \{\text{user\_id}\}$, and $\text{user\_id} \rightarrow \text{users}$. Hence, lossless.
-  - $\text{subscription_plans} \cap \text{transactions} = \{\text{plan\_id}\}$, and $\text{plan\_id} \rightarrow \text{subscription\_plans}$. Hence, lossless.
+  - $\text{subscription\_plans} \cap \text{transactions} = \{\text{plan\_id}\}$, and $\text{plan\_id} \rightarrow \text{subscription\_plans}$. Hence, lossless.
   - $\text{users} \cap \text{sessions} = \{\text{user\_id}\}$, and $\text{user\_id} \rightarrow \text{users}$. Hence, lossless.
   - $\text{users} \cap \text{accounts} = \{\text{user\_id}\}$, and $\text{user\_id} \rightarrow \text{users}$. Hence, lossless.
 
@@ -346,7 +346,7 @@ Therefore, the decomposition is **100% dependency-preserving**.
 ## 7. Final Relational Schema & Data Dictionary
 
 ### 7.1 Schema Summary (PostgreSQL Normalized Relations)
-```sql
+```text
 users (id [PK], email [UK], name, image, total_creation, credits, email_verified, created_at, updated_at)
 sessions (id [PK], user_id [FK], token [UK], expires_at, ip_address, user_agent, created_at, updated_at)
 accounts (id [PK], user_id [FK], provider_id, account_id, access_token, refresh_token, id_token, access_token_expires_at, refresh_token_expires_at, scope, password, created_at, updated_at)
